@@ -109,7 +109,7 @@
 
 <body>
 
-<h1>Social Media Management</h1>
+<h1 id="title">Social Media Management</h1>
 
 <div class="profile-row">
   <img src="social-management-pic.png" class="profile-pic">
@@ -117,7 +117,7 @@
 </div>
 
 <p class="description" id="desc">
-Manage your social media accounts professionally. Choose a package below and click "Deal / ተስማማ" to start.
+Manage your social media accounts professionally. Choose a package below and click the Deal button to start.
 </p>
 
 <div class="packages">
@@ -131,7 +131,7 @@ Manage your social media accounts professionally. Choose a package below and cli
         <source src="example-video1.mp4" type="video/mp4">
       </video>
     </div>
-    <button class="deal-btn">Deal / ተስማማ</button>
+    <button class="deal-btn" data-lang="en">Deal</button>
   </div>
 
   <!-- STANDARD -->
@@ -143,7 +143,7 @@ Manage your social media accounts professionally. Choose a package below and cli
         <source src="example-video2.mp4" type="video/mp4">
       </video>
     </div>
-    <button class="deal-btn">Deal / ተስማማ</button>
+    <button class="deal-btn" data-lang="en">Deal</button>
   </div>
 
   <!-- PREMIUM -->
@@ -155,30 +155,49 @@ Manage your social media accounts professionally. Choose a package below and cli
         <source src="example-video3.mp4" type="video/mp4">
       </video>
     </div>
-    <button class="deal-btn">Deal / ተስማማ</button>
+    <button class="deal-btn" data-lang="en">Deal</button>
   </div>
 
 </div>
 
 <script>
-const packages=document.querySelectorAll('.package-card');
+// LANGUAGE
+const lang = localStorage.getItem("lang") || "en";
+const dealButtons = document.querySelectorAll(".deal-btn");
+const title = document.getElementById("title");
+const desc = document.getElementById("desc");
 
+function updateLanguage(l){
+  dealButtons.forEach(btn=>{
+    btn.innerText = (l==="am") ? "ተስማማ" : "Deal";
+  });
+  if(l==="am"){
+    title.innerText="ሶሻል ሚዲያ አስተዳደር";
+    desc.innerText="አካውንቶችን በሙያ አስተዳደር ይዘት ይከተሉ። ፓኬጆችን ይምረጡ እና በተስማማ ቁልፍ ጀምሩ።";
+  }else{
+    title.innerText="Social Media Management";
+    desc.innerText="Manage your social media accounts professionally. Choose a package below and click the Deal button to start.";
+  }
+}
+updateLanguage(lang);
+
+// PACKAGE SELECTION
+const packages = document.querySelectorAll(".package-card");
 packages.forEach(pack=>{
-  const dealBtn=pack.querySelector('.deal-btn');
+  const dealBtn = pack.querySelector(".deal-btn");
 
-  pack.addEventListener('click',()=>{
-    // remove selected from others
-    packages.forEach(p=>p.classList.remove('selected'));
-    packages.forEach(p=>p.querySelector('.deal-btn').classList.remove('show'));
-
-    // mark selected
-    pack.classList.add('selected');
-    dealBtn.classList.add('show');
+  pack.addEventListener("click", ()=>{
+    packages.forEach(p=>{
+      p.classList.remove("selected");
+      p.querySelector(".deal-btn").classList.remove("show");
+    });
+    pack.classList.add("selected");
+    dealBtn.classList.add("show");
   });
 
-  dealBtn.addEventListener('click',(e)=>{
+  dealBtn.addEventListener("click", e=>{
     e.stopPropagation();
-    const smsText=encodeURIComponent(pack.dataset.sms);
+    const smsText = encodeURIComponent(pack.dataset.sms);
     window.location.href=`sms:+251923406940&body=${smsText}`;
   });
 });
