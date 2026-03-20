@@ -50,16 +50,22 @@ p.description{text-align:center;margin-bottom:25px;text-shadow:0 0 10px #fff;lin
   text-shadow:0 0 10px #0f0,0 0 20px #0f0,0 0 30px #0f0;
 }
 @keyframes float{50%{transform:translateY(-6px)}}
-
 .example-video{
-  width:90%; max-width:300px;
+  width:90%;max-width:300px;
   aspect-ratio:3/4;
   border-radius:15px;
   margin:8px 0;
-  pointer-events: none;           /* blocks clicks/taps */
-  user-select: none;              /* extra protection */
-  -webkit-user-select: none;
-  touch-action: none;             /* helps on mobile */
+  pointer-events:none;
+}
+.deal-btn{
+  margin-top:5px;
+  padding:8px 15px;
+  border-radius:20px;
+  background:#ff3b3b;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  display:none;
 }
 </style>
 </head>
@@ -82,15 +88,8 @@ Manage your socials with tailored content plans, viral content, and high engagem
 <h2>Basic Package</h2>
 <p>Record with iPhone, simple editing, 3 videos/week, viral content</p>
 <p class="price">17,999 Birr</p>
-<video class="example-video"
-       autoplay
-       loop
-       muted
-       playsinline
-       disablePictureInPicture
-       disableRemotePlayback
-       controls="false">
-  <source src="example-video1.MP4" type="video/mp4">
+<video class="example-video" autoplay loop muted playsinline>
+<source src="example-video1.MP4" type="video/MP4">
 </video>
 <button class="deal-btn" id="dealBasic">Deal / ተስማማ</button>
 </div>
@@ -100,15 +99,8 @@ Manage your socials with tailored content plans, viral content, and high engagem
 <h2>Standard Package</h2>
 <p>Professional cinema camera rental, massive editing, motion graphics, 3 videos/week, viral content</p>
 <p class="price">31,999 Birr</p>
-<video class="example-video"
-       autoplay
-       loop
-       muted
-       playsinline
-       disablePictureInPicture
-       disableRemotePlayback
-       controls="false">
-  <source src="example-video2.MP4" type="video/mp4">
+<video class="example-video" autoplay loop muted playsinline>
+<source src="example-video2.MP4" type="video/MP4">
 </video>
 <button class="deal-btn" id="dealStandard">Deal / ተስማማ</button>
 </div>
@@ -118,15 +110,8 @@ Manage your socials with tailored content plans, viral content, and high engagem
 <h2>Premium Package</h2>
 <p>Big difference, 3–5 videos/week, professional production, viral content, motion graphics, stories & posts on all socials</p>
 <p class="price">36,999 Birr</p>
-<video class="example-video"
-       autoplay
-       loop
-       muted
-       playsinline
-       disablePictureInPicture
-       disableRemotePlayback
-       controls="false">
-  <source src="example-video3.MP4" type="video/mp4">
+<video class="example-video" autoplay loop muted playsinline>
+<source src="example-video3.MP4" type="video/MP4">
 </video>
 <button class="deal-btn" id="dealPremium">Deal / ተስማማ</button>
 </div>
