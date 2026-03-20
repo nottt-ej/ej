@@ -5,96 +5,184 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Social Media Management Packages</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{
-  background: linear-gradient(to right, #00264d, #990000);
-  color: #fff;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding:20px;
-}
+  *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+  body{
+    background: linear-gradient(to right,#00264d,#990000);
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:20px;
+  }
 
-h1{text-align:center;margin:20px 0;font-size:2rem;text-shadow:0 0 15px #fff,0 0 30px #fff,0 0 45px #fff;}
+  h1{text-align:center;margin:20px 0;font-size:2rem;text-shadow:0 0 15px #fff;}
 
-.description{
-  width:100%;
-  max-width:700px;
-  text-align:center;
-  margin-bottom:25px;
-  font-size:1rem;
-  line-height:1.6;
-}
+  .profile-row{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:15px;
+  }
 
-.pricing{
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-  width:100%;
-  max-width:400px;
-  margin-bottom:40px;
-}
+  .profile-pic{
+    width:80px;height:80px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid #fff;
+  }
 
-.price-card{
-  background: rgba(0,0,0,0.6);
-  border-radius:25px;
-  padding:20px;
-  text-align:center;
-  transition: all 0.3s ease;
-}
+  .handle{
+    font-size:1.2rem;
+    font-weight:bold;
+    text-shadow:0 0 10px #fff,0 0 20px #fff;
+  }
 
-.price-card:hover{background: rgba(255,59,59,0.5);}
+  .description{
+    width:100%;
+    max-width:700px;
+    text-align:center;
+    margin-bottom:20px;
+    font-size:1rem;
+    line-height:1.6;
+  }
 
-.price-card h2{
-  margin-bottom:10px;
-  font-size:1.3rem;
-}
+  .video-container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    margin-bottom:20px;
+  }
 
-.price-card p{
-  font-size:1rem;
-  line-height:1.4;
-}
+  .video-container video{
+    width:150px;
+    aspect-ratio:3/4;
+    object-fit:cover;
+    border-radius:10px;
+  }
 
-/* Media query for mobile */
-@media(max-width:400px){
-  h1{font-size:1.5rem;}
-  .price-card h2{font-size:1.1rem;}
-  .price-card p{font-size:0.95rem;}
-}
+  .packages{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    width:100%;
+    max-width:500px;
+    margin-bottom:40px;
+  }
+
+  .package-card{
+    background: rgba(0,0,0,0.6);
+    border-radius:25px;
+    padding:15px;
+    text-align:center;
+    cursor:pointer;
+    transition: all 0.3s ease;
+    position:relative;
+  }
+
+  .package-card.selected{
+    background:#ff3b3b;
+  }
+
+  .deal-btn{
+    display:none;
+    margin-top:10px;
+    padding:8px 12px;
+    border-radius:25px;
+    background:#00ccff;
+    color:#000;
+    font-weight:bold;
+    cursor:pointer;
+  }
+
+  .deal-btn.show{
+    display:inline-block;
+  }
+
+  @media(max-width:400px){
+    h1{font-size:1.5rem;}
+    .profile-pic{width:60px;height:60px;}
+    .handle{font-size:1rem;}
+    .video-container video{width:120px;}
+  }
 </style>
 </head>
+
 <body>
 
-<h1>Social Media Management Packages</h1>
+<h1>Social Media Management</h1>
 
-<p class="description">
-We handle your social media accounts professionally. Choose the package that fits your needs.
+<div class="profile-row">
+  <img src="social-management-pic.png" class="profile-pic">
+  <span class="handle">@justtt_ej</span>
+</div>
+
+<p class="description" id="desc">
+Manage your social media accounts professionally. Choose a package below and click "Deal / ተስማማ" to start.
 </p>
 
-<div class="pricing">
-  <div class="price-card">
+<div class="packages">
+
+  <!-- BASIC -->
+  <div class="package-card" data-sms="I choose Basic Package, record with iPhone, simple editing, 3 videos/week — 18,000 Birr">
     <h2>Basic Package</h2>
-    <p>Record with iPhone<br>
-    Simple editing<br>
-    3 videos per week<br>
-    <strong>18,000 Birr</strong></p>
+    <p>Record with iPhone, simple editing, 3 videos/week — 18,000 Birr</p>
+    <div class="video-container">
+      <video autoplay loop muted playsinline>
+        <source src="example-video1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <button class="deal-btn">Deal / ተስማማ</button>
   </div>
-  <div class="price-card">
+
+  <!-- STANDARD -->
+  <div class="package-card" data-sms="I choose Standard Package, Professional cinema camera, massive editing & motion graphics, 3 videos/week — 31,000 Birr">
     <h2>Standard Package</h2>
-    <p>Professional cinema camera rental<br>
-    Massive editing & motion graphics<br>
-    3 videos per week<br>
-    <strong>31,000 Birr</strong></p>
+    <p>Professional cinema camera rental, massive editing & motion graphics, 3 videos/week — 31,000 Birr</p>
+    <div class="video-container">
+      <video autoplay loop muted playsinline>
+        <source src="example-video2.mp4" type="video/mp4">
+      </video>
+    </div>
+    <button class="deal-btn">Deal / ተስማማ</button>
   </div>
-  <div class="price-card">
+
+  <!-- PREMIUM -->
+  <div class="package-card" data-sms="I choose Premium Package, 3-5 videos/week, high-end editing & content strategy — 37,000 Birr">
     <h2>Premium Package</h2>
-    <p>3–5 videos per week<br>
-    Full production & social posting<br>
-    Advanced VFX & cinematic edits<br>
-    Priority scheduling & analytics<br>
-    <strong>37,000 Birr</strong></p>
+    <p>3-5 videos/week, high-end editing, content strategy, engagement boosting — 37,000 Birr</p>
+    <div class="video-container">
+      <video autoplay loop muted playsinline>
+        <source src="example-video3.mp4" type="video/mp4">
+      </video>
+    </div>
+    <button class="deal-btn">Deal / ተስማማ</button>
   </div>
+
 </div>
+
+<script>
+const packages=document.querySelectorAll('.package-card');
+
+packages.forEach(pack=>{
+  const dealBtn=pack.querySelector('.deal-btn');
+
+  pack.addEventListener('click',()=>{
+    // remove selected from others
+    packages.forEach(p=>p.classList.remove('selected'));
+    packages.forEach(p=>p.querySelector('.deal-btn').classList.remove('show'));
+
+    // mark selected
+    pack.classList.add('selected');
+    dealBtn.classList.add('show');
+  });
+
+  dealBtn.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    const smsText=encodeURIComponent(pack.dataset.sms);
+    window.location.href=`sms:+251923406940&body=${smsText}`;
+  });
+});
+</script>
 
 </body>
 </html>
