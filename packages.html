@@ -3,54 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Packages</title>
+<title>EJ | Packages</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
-body{background:linear-gradient(to right,#00264d,#990000);color:#fff}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{
+  background:linear-gradient(to right,#00264d,#990000);
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:30px 20px;
+}
 
-.page{opacity:0;animation:fade .6s ease forwards}
-@keyframes fade{to{opacity:1}}
+h1{text-align:center;margin-bottom:25px}
 
-.container{max-width:400px;margin:80px auto;display:flex;flex-direction:column;gap:20px}
+.package-buttons{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  width:100%;
+  max-width:400px;
+}
 
-.btn{padding:16px;border-radius:30px;background:#ff3b3b;color:#fff;text-align:center;font-weight:bold;text-decoration:none}
-.btn.gray{background:#777}
-.small{font-size:.65rem;opacity:.8}
+button{
+  padding:15px;
+  border:none;
+  border-radius:30px;
+  font-size:1rem;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.3s;
+}
+
+#tiktokBtn{
+  background:#ff3b3b;
+  color:#fff;
+}
+
+#socialBtn{
+  background:#444;
+  color:#fff;
+}
+
+button:hover{transform:scale(1.05)}
 </style>
 </head>
 
 <body>
 
-<div class="page">
-<div class="container">
+<h1 id="title">Choose a Package</h1>
 
-<a href="tiktok-promo-details.html" class="btn" id="ttBtn">TikTok Promotion</a>
-
-<div class="btn gray">
-<div id="smBtn">Social Media Management</div>
-<div class="small" id="soon">coming soon</div>
-</div>
-
-</div>
+<div class="package-buttons">
+  <button id="tiktokBtn">TikTok Promotion</button>
+  <button id="socialBtn">Social Media Management</button>
 </div>
 
 <script>
-const ttBtn=document.getElementById("ttBtn");
-const smBtn=document.getElementById("smBtn");
-const soon=document.getElementById("soon");
+const title = document.getElementById("title");
+const tiktokBtn = document.getElementById("tiktokBtn");
+const socialBtn = document.getElementById("socialBtn");
 
-const lang = localStorage.getItem("lang") || "en";
-
-if(lang==="am"){
-    ttBtn.innerText="የTikTok ማስታወቂያ ለማሰራት";
-    smBtn.innerText="ሶሻል ሚዲያ ማኔጅመንት ለማሰራት";
-    soon.innerText="በቅርቡ";
-}else{
-    ttBtn.innerText="TikTok Promotion";
-    smBtn.innerText="Social Media Management";
-    soon.innerText="coming soon";
+function setLang(lang){
+  if(lang==="am"){
+    title.innerText="ፓኬጅ ይምረጡ";
+    tiktokBtn.innerText="የTikTok ማስታወቂያ";
+    socialBtn.innerText="ሶሻል ሚዲያ አስተዳደር";
+  }else{
+    title.innerText="Choose a Package";
+    tiktokBtn.innerText="TikTok Promotion";
+    socialBtn.innerText="Social Media Management";
+  }
 }
+
+const saved = localStorage.getItem("lang") || "en";
+setLang(saved);
+
+// Button actions
+tiktokBtn.onclick = () => window.location = "tiktok-promo-details.html";
+socialBtn.onclick = () => window.location = "social-management-details.html"; // now enabled
 </script>
 
 </body>
