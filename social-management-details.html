@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Media Management Packages</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{
+  background: linear-gradient(to right, #00264d, #990000);
+  color: #fff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:20px;
+}
+
+h1{text-align:center;margin:20px 0;font-size:2rem;text-shadow:0 0 15px #fff,0 0 30px #fff,0 0 45px #fff;}
+
+.description{
+  width:100%;
+  max-width:700px;
+  text-align:center;
+  margin-bottom:25px;
+  font-size:1rem;
+  line-height:1.6;
+}
+
+.pricing{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  width:100%;
+  max-width:400px;
+  margin-bottom:40px;
+}
+
+.price-card{
+  background: rgba(0,0,0,0.6);
+  border-radius:25px;
+  padding:20px;
+  text-align:center;
+  transition: all 0.3s ease;
+}
+
+.price-card:hover{background: rgba(255,59,59,0.5);}
+
+.price-card h2{
+  margin-bottom:10px;
+  font-size:1.3rem;
+}
+
+.price-card p{
+  font-size:1rem;
+  line-height:1.4;
+}
+
+/* Media query for mobile */
+@media(max-width:400px){
+  h1{font-size:1.5rem;}
+  .price-card h2{font-size:1.1rem;}
+  .price-card p{font-size:0.95rem;}
+}
+</style>
+</head>
+<body>
+
+<h1>Social Media Management Packages</h1>
+
+<p class="description">
+We handle your social media accounts professionally. Choose the package that fits your needs.
+</p>
+
+<div class="pricing">
+  <div class="price-card">
+    <h2>Basic Package</h2>
+    <p>Record with iPhone<br>
+    Simple editing<br>
+    3 videos per week<br>
+    <strong>18,000 Birr</strong></p>
+  </div>
+  <div class="price-card">
+    <h2>Standard Package</h2>
+    <p>Professional cinema camera rental<br>
+    Massive editing & motion graphics<br>
+    3 videos per week<br>
+    <strong>31,000 Birr</strong></p>
+  </div>
+  <div class="price-card">
+    <h2>Premium Package</h2>
+    <p>3–5 videos per week<br>
+    Full production & social posting<br>
+    Advanced VFX & cinematic edits<br>
+    Priority scheduling & analytics<br>
+    <strong>37,000 Birr</strong></p>
+  </div>
+</div>
+
+</body>
+</html>
