@@ -145,12 +145,6 @@ video{width:100%;height:100%;object-fit:cover;}
 
 .option.active{background:#00ff66;color:#000;}
 
-input{
-  padding:8px;
-  border-radius:8px;
-  border:none;
-}
-
 .next-btn{
   margin-top:10px;
   padding:10px;
@@ -174,7 +168,7 @@ input{
 <p>
 iPhone shooting • 3 videos per week • simple viral-style content 
 </p>
-<span class="price">18,000 Birr</span>
+<span class="price">15,000 Birr</span>
 <button class="sample-btn">View Sample Videos</button>
 </div>
 
@@ -247,7 +241,6 @@ function build(){
     vid.autoplay = true;
     vid.muted = true;
 
-    // FIXES
     vid.setAttribute("playsinline", "");
     vid.setAttribute("webkit-playsinline", "");
     vid.setAttribute("controlsList", "nofullscreen nodownload noremoteplayback");
@@ -270,16 +263,22 @@ function update(){
   const boxes = document.querySelectorAll(".video-box");
 
   boxes.forEach((box,i)=>{
+    const video = box.querySelector("video");
     box.className="video-box";
 
     if(i === index){
       box.classList.add("active");
+      video.muted = false; // 🔊 active has sound
     }
     else if(i === index - 1){
       box.classList.add("prev");
+      video.muted = true;
     }
     else if(i === index + 1){
       box.classList.add("next");
+      video.muted = true;
+    } else {
+      video.muted = true;
     }
   });
 }
@@ -330,7 +329,7 @@ function closeModal(){
   stage.innerHTML="";
 }
 
-// QUESTIONS (UNCHANGED)
+// QUESTIONS (INPUT REMOVED)
 
 const questions = [
   {q:"Main Goal", options:["Grow followers","Make the brand famous","Get customers fast"]},
@@ -391,16 +390,12 @@ function showQuestion(){
     box.appendChild(div);
   });
 
-  let input = document.createElement("input");
-  input.placeholder="Type your own...";
-  box.appendChild(input);
-
   let next = document.createElement("button");
   next.className="next-btn";
   next.innerText="Next";
 
   next.onclick = ()=>{
-    let value = input.value || selected;
+    let value = selected;
     if(Array.isArray(value)) value = value.join(", ");
 
     answers.push(value || "-");
