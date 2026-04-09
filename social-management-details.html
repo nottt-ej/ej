@@ -6,12 +6,7 @@
 <title>Social Media Management</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial, sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;}
 
 body{
   background:linear-gradient(to right,#00264d,#990000);
@@ -22,14 +17,11 @@ body{
   padding:20px;
 }
 
-h1{
-  margin:20px 0;
-}
+h1{margin:20px 0;}
 
-/* PACKAGES */
 .packages{
   width:100%;
-  max-width:600px;
+  max-width:650px;
   display:flex;
   flex-direction:column;
   gap:15px;
@@ -37,24 +29,19 @@ h1{
 
 .package-card{
   background:rgba(0,0,0,0.6);
-  padding:15px;
+  padding:18px;
   border-radius:20px;
   text-align:center;
 }
 
-.package-card h2{
-  color:#ffcc00;
-  margin-bottom:8px;
-}
+.package-card h2{color:#ffcc00;margin-bottom:8px;}
 
-.price{
-  color:#00ff66;
-  font-weight:bold;
-}
+.package-card p{line-height:1.5;font-size:0.95rem;}
 
-/* BUTTON */
+.price{color:#00ff66;font-weight:bold;display:block;margin-top:8px;font-size:1.1rem;}
+
 .sample-btn{
-  margin-top:10px;
+  margin-top:12px;
   padding:10px;
   border-radius:20px;
   border:none;
@@ -62,7 +49,33 @@ h1{
   font-weight:bold;
 }
 
-/* MODAL */
+/* CUSTOM BUTTON */
+.custom-btn{
+  margin-top:20px;
+  padding:14px;
+  border:none;
+  border-radius:30px;
+  font-weight:bold;
+  font-size:16px;
+  cursor:pointer;
+  background:#ffcc00;
+  color:#000;
+  animation:glow 1.5s infinite alternate, shake 1.5s infinite;
+}
+
+@keyframes glow{
+  from{box-shadow:0 0 10px #ffcc00;}
+  to{box-shadow:0 0 25px #ffcc00,0 0 40px #ff9900;}
+}
+
+@keyframes shake{
+  0%{transform:translateX(0);} 
+  25%{transform:translateX(-2px);} 
+  50%{transform:translateX(2px);} 
+  75%{transform:translateX(-2px);} 
+  100%{transform:translateX(0);} 
+}
+
 .modal{
   position:fixed;
   inset:0;
@@ -73,7 +86,6 @@ h1{
   justify-content:center;
 }
 
-/* STAGE */
 .stage{
   width:100%;
   max-width:900px;
@@ -85,7 +97,6 @@ h1{
   overflow:hidden;
 }
 
-/* VIDEO BOX */
 .video-box{
   position:absolute;
   width:260px;
@@ -99,41 +110,55 @@ h1{
   cursor:pointer;
 }
 
-/* ACTIVE */
-.video-box.active{
-  opacity:1;
-  transform:scale(1);
-  z-index:3;
-}
+.video-box.active{opacity:1;transform:scale(1);z-index:3;}
+.video-box.prev{opacity:0.4;transform:translateX(-180px) scale(0.8);z-index:2;}
+.video-box.next{opacity:0.4;transform:translateX(180px) scale(0.8);z-index:2;}
 
-/* SIDE */
-.video-box.prev{
-  opacity:0.4;
-  transform:translateX(-180px) scale(0.8);
-  z-index:2;
-}
+video{width:100%;height:100%;object-fit:cover;}
 
-.video-box.next{
-  opacity:0.4;
-  transform:translateX(180px) scale(0.8);
-  z-index:2;
-}
-
-/* VIDEO */
-video{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-/* CLOSE */
 .close{
   position:absolute;
-  top:20px;
+  top:15px;
   right:20px;
-  font-size:25px;
+  font-size:24px;
   cursor:pointer;
-  z-index:5;
+  z-index:10;
+}
+
+/* QUESTION BOX */
+#questionBox{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  background:rgba(0,0,0,0.85);
+  padding:20px;
+  border-radius:15px;
+  width:320px;
+}
+
+.option{
+  padding:10px;
+  border:1px solid #555;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.option.active{background:#00ff66;color:#000;}
+
+input{
+  padding:8px;
+  border-radius:8px;
+  border:none;
+}
+
+.next-btn{
+  margin-top:10px;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  background:#00ff66;
+  font-weight:bold;
+  cursor:pointer;
 }
 </style>
 </head>
@@ -145,32 +170,46 @@ video{
 <div class="packages">
 
 <div class="package-card" data-type="basic">
-<h2>Basic</h2>
-<p>Simple viral content. iPhone shoot. 3 videos/week. No host.</p>
-<p class="price">15,000 Birr</p>
-<button class="sample-btn">View Samples</button>
+<h2>Basic Package</h2>
+<p>
+Perfect for businesses starting their online presence. We create simple, viral-focused content using iPhone shooting techniques, optimized for reach and engagement. Includes 3 videos per week with clean editing and fast delivery — no host included, keeping it cost-efficient and effective.
+</p>
+<span class="price">15,000 Birr</span>
+<button class="sample-btn">View Sample Videos</button>
 </div>
 
 <div class="package-card" data-type="standard">
-<h2>Standard</h2>
-<p>Pro camera, heavy editing, better quality. With host/model.</p>
-<p class="price">28,000 Birr</p>
-<button class="sample-btn">View Samples</button>
+<h2>Standard Package</h2>
+<p>
+Designed for growing brands that want higher production value. We use professional camera equipment, advanced editing techniques, and motion-enhanced storytelling. Includes a host or model for better audience connection and stronger brand presence, with 3 videos per week.
+</p>
+<span class="price">28,000 Birr</span>
+<button class="sample-btn">View Sample Videos</button>
 </div>
 
 <div class="package-card" data-type="premium">
-<h2>Premium</h2>
-<p>Same as Standard but upgraded. Top creators, premium production.</p>
-<p class="price">37,000 Birr</p>
-<button class="sample-btn">View Samples</button>
+<h2>Premium Package</h2>
+<p>
+Our highest-tier service built for brands aiming for maximum impact. Includes everything in Standard, plus collaboration with well-known content creators and influencers when needed. High-end production, strategic scripting, and premium visual execution for strong viral performance.
+</p>
+<span class="price">37,000 Birr</span>
+<button class="sample-btn">View Sample Videos</button>
 </div>
+
+<button class="custom-btn" onclick="startQuestions()">Custom Package</button>
 
 </div>
 
-<!-- MODAL -->
+<!-- ORIGINAL MODAL -->
 <div class="modal" id="modal">
   <div class="close" onclick="closeModal()">✖</div>
   <div class="stage" id="stage"></div>
+</div>
+
+<!-- QUESTION MODAL -->
+<div class="modal" id="questionModal">
+  <div class="close" onclick="closeQuestions()">✖</div>
+  <div id="questionBox"></div>
 </div>
 
 <script>
@@ -180,7 +219,8 @@ const stage = document.getElementById("stage");
 let videos = [];
 let index = 0;
 
-// OPEN
+// ORIGINAL VIDEO LOGIC
+
 document.querySelectorAll(".sample-btn").forEach(btn=>{
   btn.onclick = (e)=>{
     const type = e.target.closest(".package-card").dataset.type;
@@ -196,7 +236,6 @@ document.querySelectorAll(".sample-btn").forEach(btn=>{
   }
 });
 
-// BUILD
 function build(){
   stage.innerHTML="";
 
@@ -212,7 +251,6 @@ function build(){
 
     box.appendChild(vid);
 
-    // ✅ TAP VIDEO = MAKE ACTIVE
     box.onclick = ()=>{
       index = i;
       update();
@@ -224,7 +262,6 @@ function build(){
   update();
 }
 
-// UPDATE
 function update(){
   const boxes = document.querySelectorAll(".video-box");
 
@@ -243,31 +280,113 @@ function update(){
   });
 }
 
-// SWIPE
-let startX = 0;
-
-stage.addEventListener("touchstart",e=>{
-  startX = e.touches[0].clientX;
-});
-
-stage.addEventListener("touchend",e=>{
-  let diff = e.changedTouches[0].clientX - startX;
-
-  if(diff > 50 && index > 0){
-    index--;
-    update();
-  }
-  else if(diff < -50 && index < videos.length-1){
-    index++;
-    update();
+modal.addEventListener("click", (e)=>{
+  if(e.target === modal){
+    closeModal();
   }
 });
 
-// CLOSE
 function closeModal(){
   modal.style.display="none";
   stage.innerHTML="";
 }
+
+// CUSTOM PACKAGE FLOW
+
+const questions = [
+  {q:"Main Goal", options:["Grow followers","Make the brand famous","Get customers fast"]},
+  {q:"Shooting Style", options:["Shoot with iPhone","Shoot with camera","Full video production"]},
+  {q:"Host / Model", options:["No host needed","Yes, we need a host","We want a famous content creator","We want EJ as the host"]},
+  {q:"Editing Level", options:["Basic editing","Advanced editing","Premium editing"]},
+  {q:"Posting Frequency", options:["2 videos per week","3 videos per week","Post every day"]},
+  {q:"Platforms", options:["TikTok posts","Instagram posts","Instagram reels","Facebook reels","Facebook posts","Telegram channel posts"], multi:true}
+];
+
+let answers = [];
+let step = 0;
+
+function startQuestions(){
+  document.getElementById("questionModal").style.display="flex";
+  step = 0;
+  answers = [];
+  showQuestion();
+}
+
+function closeQuestions(){
+  document.getElementById("questionModal").style.display="none";
+}
+
+function showQuestion(){
+  const box = document.getElementById("questionBox");
+  box.innerHTML = "";
+
+  let current = questions[step];
+
+  let title = document.createElement("h3");
+  title.innerText = current.q;
+  box.appendChild(title);
+
+  let selected = current.multi ? [] : "";
+
+  current.options.forEach(opt=>{
+    let div = document.createElement("div");
+    div.className="option";
+    div.innerText = opt;
+
+    div.onclick = ()=>{
+      if(current.multi){
+        if(selected.includes(opt)){
+          selected = selected.filter(o=>o!==opt);
+          div.classList.remove("active");
+        } else{
+          selected.push(opt);
+          div.classList.add("active");
+        }
+      } else{
+        selected = opt;
+        document.querySelectorAll(".option").forEach(o=>o.classList.remove("active"));
+        div.classList.add("active");
+      }
+    };
+
+    box.appendChild(div);
+  });
+
+  let input = document.createElement("input");
+  input.placeholder="Type your own...";
+  box.appendChild(input);
+
+  let next = document.createElement("button");
+  next.className="next-btn";
+  next.innerText="Next";
+
+  next.onclick = ()=>{
+    let value = input.value || selected;
+    if(Array.isArray(value)) value = value.join(", ");
+
+    answers.push(value || "-");
+
+    step++;
+    if(step < questions.length){
+      showQuestion();
+    } else{
+      showResult();
+    }
+  };
+
+  box.appendChild(next);
+}
+
+function showResult(){
+  const box = document.getElementById("questionBox");
+
+  box.innerHTML = "<h3>Screenshot this and send it to me</h3>";
+
+  questions.forEach((q,i)=>{
+    box.innerHTML += `<p><b>${q.q}:</b> ${answers[i]}</p>`;
+  });
+}
+
 </script>
 
 </body>
