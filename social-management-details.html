@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -219,8 +219,6 @@ const stage = document.getElementById("stage");
 let videos = [];
 let index = 0;
 
-// ORIGINAL VIDEO LOGIC
-
 document.querySelectorAll(".sample-btn").forEach(btn=>{
   btn.onclick = (e)=>{
     const type = e.target.closest(".package-card").dataset.type;
@@ -248,6 +246,12 @@ function build(){
     vid.loop = true;
     vid.autoplay = true;
     vid.muted = true;
+
+    // FIXES
+    vid.setAttribute("playsinline", "");
+    vid.setAttribute("webkit-playsinline", "");
+    vid.setAttribute("controlsList", "nofullscreen nodownload noremoteplayback");
+    vid.disablePictureInPicture = true;
 
     box.appendChild(vid);
 
@@ -280,6 +284,41 @@ function update(){
   });
 }
 
+// SWIPE
+let startX = 0;
+let endX = 0;
+
+stage.addEventListener("touchstart", e=>{
+  startX = e.touches[0].clientX;
+});
+
+stage.addEventListener("touchend", e=>{
+  endX = e.changedTouches[0].clientX;
+  handleSwipe();
+});
+
+stage.addEventListener("mousedown", e=>{
+  startX = e.clientX;
+});
+
+stage.addEventListener("mouseup", e=>{
+  endX = e.clientX;
+  handleSwipe();
+});
+
+function handleSwipe(){
+  let diff = startX - endX;
+
+  if(diff > 50 && index < videos.length - 1){
+    index++;
+    update();
+  }
+  else if(diff < -50 && index > 0){
+    index--;
+    update();
+  }
+}
+
 modal.addEventListener("click", (e)=>{
   if(e.target === modal){
     closeModal();
@@ -291,7 +330,7 @@ function closeModal(){
   stage.innerHTML="";
 }
 
-// CUSTOM PACKAGE FLOW
+// QUESTIONS (UNCHANGED)
 
 const questions = [
   {q:"Main Goal", options:["Grow followers","Make the brand famous","Get customers fast"]},
@@ -386,7 +425,6 @@ function showResult(){
     box.innerHTML += `<p><b>${q.q}:</b> ${answers[i]}</p>`;
   });
 }
-
 </script>
 
 </body>
