@@ -6,7 +6,7 @@
 <title>Social Media Management</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;}
 
 body{
   background:linear-gradient(to right,#00264d,#990000);
@@ -17,25 +17,41 @@ body{
   padding:20px;
 }
 
-h1{margin:20px 0;text-shadow:0 0 10px #fff;}
+h1{
+  margin:20px 0;
+  font-size:2em;
+}
 
 .packages{
   width:100%;
-  max-width:500px;
+  max-width:600px;
   display:flex;
   flex-direction:column;
-  gap:15px;
+  gap:20px;
 }
 
 .package-card{
   background:rgba(0,0,0,0.6);
-  padding:15px;
+  padding:20px;
   border-radius:20px;
   text-align:center;
-  transition:0.3s;
+  transition:0.3s ease;
 }
 
-.package-card.selected{background:#ff3b3b;}
+.package-card:hover{
+  background:rgba(0,0,0,0.8);
+}
+
+.package-card h2{
+  margin-bottom:10px;
+  font-size:1.5em;
+  color:#ffcc00;
+}
+
+.package-card p{
+  font-size:1em;
+  line-height:1.5;
+}
 
 .price{
   color:#00ff00;
@@ -43,8 +59,8 @@ h1{margin:20px 0;text-shadow:0 0 10px #fff;}
 }
 
 .sample-btn{
-  margin-top:10px;
-  padding:8px 12px;
+  margin-top:15px;
+  padding:10px 16px;
   border-radius:20px;
   background:#fff;
   color:#000;
@@ -54,54 +70,76 @@ h1{margin:20px 0;text-shadow:0 0 10px #fff;}
   align-items:center;
   justify-content:center;
   gap:8px;
+  transition:0.2s;
 }
 
-.sample-btn img{
-  width:18px;
+.sample-btn:hover{
+  background:#f0f0f0;
 }
 
 /* MODAL */
 .modal{
   position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
+  inset:0;
   backdrop-filter:blur(15px);
-  background:rgba(0,0,0,0.6);
+  background:rgba(0,0,0,0.7);
   display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+}
+
+/* STAGE */
+.stage{
+  position:relative;
+  width:100%;
+  max-width:900px;
+  height:500px;
+  display:flex;
   align-items:center;
   justify-content:center;
   overflow:hidden;
 }
 
-/* SLIDER */
-.slider{
-  display:flex;
-  align-items:center;
-  transition:0.4s ease;
-}
-
-/* VIDEO STYLE */
+/* VIDEO BOX */
 .video-box{
-  width:220px;
-  height:390px;
-  margin:0 10px;
-  opacity:0.4;
-  transform:scale(0.8);
-  transition:0.4s;
-}
-
-.video-box.active{
+  position:absolute;
   width:260px;
-  height:460px;
-  opacity:1;
-  transform:scale(1);
+  height:462px;
+  border-radius:25px;
+  overflow:hidden;
+  background:#000;
+  transition:0.4s ease;
+  opacity:0;
+  transform:scale(0.7);
 }
 
-.video-box video{
+/* ACTIVE */
+.video-box.active{
+  opacity:1;
+  transform:translateX(0) scale(1);
+  z-index:3;
+}
+
+/* LEFT */
+.video-box.prev{
+  opacity:0.4;
+  transform:translateX(-180px) scale(0.8);
+  z-index:2;
+}
+
+/* RIGHT */
+.video-box.next{
+  opacity:0.4;
+  transform:translateX(180px) scale(0.8);
+  z-index:2;
+}
+
+/* VIDEO */
+video{
   width:100%;
   height:100%;
   object-fit:cover;
-  border-radius:15px;
 }
 
 /* CLOSE */
@@ -111,7 +149,25 @@ h1{margin:20px 0;text-shadow:0 0 10px #fff;}
   right:20px;
   font-size:25px;
   cursor:pointer;
+  z-index:5;
 }
+
+/* NAVIGATION BUTTONS */
+.nav-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(255,255,255,0.8);
+  border:none;
+  font-size:20px;
+  padding:10px 15px;
+  border-radius:10px;
+  cursor:pointer;
+  z-index:5;
+}
+
+#prevBtn{left:10px;}
+#nextBtn{right:10px;}
 </style>
 </head>
 
@@ -121,34 +177,22 @@ h1{margin:20px 0;text-shadow:0 0 10px #fff;}
 
 <div class="packages">
 
-<!-- BASIC -->
 <div class="package-card" data-type="basic">
-  <h2>Basic Package</h2>
-  <p>Record with iPhone, simple editing, 3 videos/week, viral content — <span class="price">17,999 Birr</span></p>
-
-  <button class="sample-btn">
-    <img src="play button.png"> View Sample Videos
-  </button>
+<h2>Basic Package</h2>
+<p>Ideal for small businesses and startups, this package provides essential social media content creation. We record with an iPhone, perform basic editing, and deliver 3 high-quality videos per week to maintain your online presence — <span class="price">14,500 Birr</span></p>
+<button class="sample-btn"><img src="play button.png"> View Sample Videos</button>
 </div>
 
-<!-- STANDARD -->
 <div class="package-card" data-type="standard">
-  <h2>Standard Package</h2>
-  <p>Professional cinema camera, massive editing & motion graphics, 3 videos/week — <span class="price">30,999 Birr</span></p>
-
-  <button class="sample-btn">
-    <img src="play button.png"> View Sample Videos
-  </button>
+<h2>Standard Package</h2>
+<p>Designed for growing brands, this package includes professional camera work, advanced editing, and motion graphics. Receive 3 high-quality videos per week with enhanced visual storytelling — <span class="price">27,900 Birr</span></p>
+<button class="sample-btn"><img src="play button.png"> View Sample Videos</button>
 </div>
 
-<!-- PREMIUM -->
 <div class="package-card" data-type="premium">
-  <h2>Premium Package</h2>
-  <p>3-5 videos/week, high-end editing, professional celebrity , high end production , content strategy, viral growth — <span class="price">36,999 Birr</span></p>
-
-  <button class="sample-btn">
-    <img src="play button.png"> View Sample Videos
-  </button>
+<h2>Premium Package</h2>
+<p>Our all-inclusive package for brands aiming for maximum engagement. Includes high-end editing, tailored content strategy, and 3-5 videos per week,famous tiktokers as hosts for videos, ensuring professional storytelling and consistent online growth — <span class="price">36,999 Birr</span></p>
+<button class="sample-btn"><img src="play button.png"> View Sample Videos</button>
 </div>
 
 </div>
@@ -156,19 +200,23 @@ h1{margin:20px 0;text-shadow:0 0 10px #fff;}
 <!-- MODAL -->
 <div class="modal" id="modal">
   <div class="close" onclick="closeModal()">✖</div>
-  <div class="slider" id="slider"></div>
+  <div class="stage" id="stage"></div>
+  <button class="nav-btn" id="prevBtn">◀</button>
+  <button class="nav-btn" id="nextBtn">▶</button>
 </div>
 
 <script>
 const modal = document.getElementById("modal");
-const slider = document.getElementById("slider");
+const stage = document.getElementById("stage");
+const nextBtn = document.getElementById("nextBtn");
+const prevBtn = document.getElementById("prevBtn");
 
 let videos = [];
 let index = 0;
 
-// OPEN VIDEOS
+// OPEN
 document.querySelectorAll(".sample-btn").forEach(btn=>{
-  btn.addEventListener("click",(e)=>{
+  btn.onclick = (e)=>{
     const type = e.target.closest(".package-card").dataset.type;
 
     videos = [];
@@ -177,85 +225,108 @@ document.querySelectorAll(".sample-btn").forEach(btn=>{
     }
 
     index = 0;
-    buildSlider();
+    build();
     modal.style.display="flex";
-  });
+  }
 });
 
-// BUILD SLIDER
-function buildSlider(){
-  slider.innerHTML="";
+// BUILD
+function build(){
+  stage.innerHTML="";
 
   videos.forEach((src,i)=>{
     const box = document.createElement("div");
     box.className="video-box";
 
-    if(i===index) box.classList.add("active");
-
     const vid = document.createElement("video");
     vid.src = src;
     vid.loop = true;
     vid.autoplay = true;
-    vid.muted = false;
+    vid.muted = true; // prevent autoplay issues
 
-    // tap to pause/play
-    vid.addEventListener("click",()=>{
-      if(vid.paused) vid.play();
-      else vid.pause();
-    });
+    vid.onclick = ()=>{
+      vid.paused ? vid.play() : vid.pause();
+    };
 
     box.appendChild(vid);
-    slider.appendChild(box);
+    stage.appendChild(box);
   });
 
-  updateSlider();
+  update();
 }
 
-// UPDATE POSITION
-function updateSlider(){
-  const offset = index * -240;
-  slider.style.transform = `translateX(${offset}px)`;
+// UPDATE POSITIONS
+function update(){
+  const boxes = document.querySelectorAll(".video-box");
 
-  document.querySelectorAll(".video-box").forEach((box,i)=>{
-    box.classList.remove("active");
-    if(i===index) box.classList.add("active");
+  boxes.forEach((box,i)=>{
+    box.className="video-box";
+
+    if(i === index){
+      box.classList.add("active");
+    } 
+    else if(i === index - 1){
+      box.classList.add("prev");
+    } 
+    else if(i === index + 1){
+      box.classList.add("next");
+    }
   });
 }
 
-// SWIPE
-let startX = 0;
-
-slider.addEventListener("touchstart",e=>{
-  startX = e.touches[0].clientX;
-});
-
-slider.addEventListener("touchend",e=>{
-  let endX = e.changedTouches[0].clientX;
-
-  if(startX - endX > 50){
-    next();
-  }else if(endX - startX > 50){
-    prev();
-  }
-});
-
+// NAVIGATION
 function next(){
   if(index < videos.length-1){
     index++;
-    updateSlider();
+    update();
   }
 }
 
 function prev(){
   if(index > 0){
     index--;
-    updateSlider();
+    update();
   }
 }
 
+// BUTTON NAVIGATION
+nextBtn.addEventListener("click", next);
+prevBtn.addEventListener("click", prev);
+
+// TOUCH + MOUSE SUPPORT
+let startX = 0;
+let isDown = false;
+
+stage.addEventListener("mousedown",e=>{
+  isDown = true;
+  startX = e.clientX;
+});
+
+stage.addEventListener("mouseup",e=>{
+  if(!isDown) return;
+  let diff = e.clientX - startX;
+
+  if(diff > 50) prev();
+  else if(diff < -50) next();
+
+  isDown = false;
+});
+
+stage.addEventListener("touchstart",e=>{
+  startX = e.touches[0].clientX;
+});
+
+stage.addEventListener("touchend",e=>{
+  let diff = e.changedTouches[0].clientX - startX;
+
+  if(diff > 50) prev();
+  else if(diff < -50) next();
+});
+
+// CLOSE
 function closeModal(){
   modal.style.display="none";
-  slider.innerHTML="";
+  stage.innerHTML="";
 }
 </script>
 
