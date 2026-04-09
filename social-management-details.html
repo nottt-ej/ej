@@ -6,7 +6,12 @@
 <title>Social Media Management</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
 
 body{
   background:linear-gradient(to right,#00264d,#990000);
@@ -19,85 +24,64 @@ body{
 
 h1{
   margin:20px 0;
-  font-size:2em;
 }
 
+/* PACKAGES */
 .packages{
   width:100%;
   max-width:600px;
   display:flex;
   flex-direction:column;
-  gap:20px;
+  gap:15px;
 }
 
 .package-card{
   background:rgba(0,0,0,0.6);
-  padding:20px;
+  padding:15px;
   border-radius:20px;
   text-align:center;
-  transition:0.3s ease;
-}
-
-.package-card:hover{
-  background:rgba(0,0,0,0.8);
 }
 
 .package-card h2{
-  margin-bottom:10px;
-  font-size:1.5em;
   color:#ffcc00;
-}
-
-.package-card p{
-  font-size:1em;
-  line-height:1.5;
+  margin-bottom:8px;
 }
 
 .price{
-  color:#00ff00;
+  color:#00ff66;
   font-weight:bold;
 }
 
+/* BUTTON */
 .sample-btn{
-  margin-top:15px;
-  padding:10px 16px;
+  margin-top:10px;
+  padding:10px;
   border-radius:20px;
-  background:#fff;
-  color:#000;
-  font-weight:bold;
+  border:none;
   cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  transition:0.2s;
-}
-
-.sample-btn:hover{
-  background:#f0f0f0;
+  font-weight:bold;
 }
 
 /* MODAL */
 .modal{
   position:fixed;
   inset:0;
-  backdrop-filter:blur(15px);
   background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(15px);
   display:none;
   align-items:center;
   justify-content:center;
-  flex-direction:column;
 }
 
 /* STAGE */
 .stage{
-  position:relative;
   width:100%;
   max-width:900px;
   height:500px;
   display:flex;
   align-items:center;
   justify-content:center;
+  position:relative;
   overflow:hidden;
 }
 
@@ -105,30 +89,30 @@ h1{
 .video-box{
   position:absolute;
   width:260px;
-  height:462px;
+  height:460px;
   border-radius:25px;
   overflow:hidden;
   background:#000;
-  transition:0.4s ease;
   opacity:0;
   transform:scale(0.7);
+  transition:0.4s ease;
+  cursor:pointer;
 }
 
 /* ACTIVE */
 .video-box.active{
   opacity:1;
-  transform:translateX(0) scale(1);
+  transform:scale(1);
   z-index:3;
 }
 
-/* LEFT */
+/* SIDE */
 .video-box.prev{
   opacity:0.4;
   transform:translateX(-180px) scale(0.8);
   z-index:2;
 }
 
-/* RIGHT */
 .video-box.next{
   opacity:0.4;
   transform:translateX(180px) scale(0.8);
@@ -151,23 +135,6 @@ video{
   cursor:pointer;
   z-index:5;
 }
-
-/* NAVIGATION BUTTONS */
-.nav-btn{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  background:rgba(255,255,255,0.8);
-  border:none;
-  font-size:20px;
-  padding:10px 15px;
-  border-radius:10px;
-  cursor:pointer;
-  z-index:5;
-}
-
-#prevBtn{left:10px;}
-#nextBtn{right:10px;}
 </style>
 </head>
 
@@ -178,21 +145,24 @@ video{
 <div class="packages">
 
 <div class="package-card" data-type="basic">
-<h2>Basic Package</h2>
-<p>Ideal for small businesses and startups, this package provides essential social media content creation. We record with an iPhone, perform basic editing, and deliver 3 high-quality videos per week to maintain your online presence — <span class="price">14,500 Birr</span></p>
-<button class="sample-btn"><img src="play button.png"> View Sample Videos</button>
+<h2>Basic</h2>
+<p>Simple viral content. iPhone shoot. 3 videos/week. No host.</p>
+<p class="price">15,000 Birr</p>
+<button class="sample-btn">View Samples</button>
 </div>
 
 <div class="package-card" data-type="standard">
-<h2>Standard Package</h2>
-<p>Designed for growing brands, this package includes professional camera work, advanced editing, and motion graphics. Receive 3 high-quality videos per week with enhanced visual storytelling — <span class="price">27,900 Birr</span></p>
-<button class="sample-btn"><img src="play button.png"> View Sample Videos</button>
+<h2>Standard</h2>
+<p>Pro camera, heavy editing, better quality. With host/model.</p>
+<p class="price">28,000 Birr</p>
+<button class="sample-btn">View Samples</button>
 </div>
 
 <div class="package-card" data-type="premium">
-<h2>Premium Package</h2>
-<p>Our all-inclusive package for brands aiming for maximum engagement. Includes high-end editing, tailored content strategy, and 3-5 videos per week,famous tiktokers as hosts for videos, ensuring professional storytelling and consistent online growth — <span class="price">36,999 Birr</span></p>
-<button class="sample-btn"><img src="play button.png"> View Sample Videos</button>
+<h2>Premium</h2>
+<p>Same as Standard but upgraded. Top creators, premium production.</p>
+<p class="price">37,000 Birr</p>
+<button class="sample-btn">View Samples</button>
 </div>
 
 </div>
@@ -201,15 +171,11 @@ video{
 <div class="modal" id="modal">
   <div class="close" onclick="closeModal()">✖</div>
   <div class="stage" id="stage"></div>
-  <button class="nav-btn" id="prevBtn">◀</button>
-  <button class="nav-btn" id="nextBtn">▶</button>
 </div>
 
 <script>
 const modal = document.getElementById("modal");
 const stage = document.getElementById("stage");
-const nextBtn = document.getElementById("nextBtn");
-const prevBtn = document.getElementById("prevBtn");
 
 let videos = [];
 let index = 0;
@@ -242,20 +208,23 @@ function build(){
     vid.src = src;
     vid.loop = true;
     vid.autoplay = true;
-    vid.muted = true; // prevent autoplay issues
-
-    vid.onclick = ()=>{
-      vid.paused ? vid.play() : vid.pause();
-    };
+    vid.muted = true;
 
     box.appendChild(vid);
+
+    // ✅ TAP VIDEO = MAKE ACTIVE
+    box.onclick = ()=>{
+      index = i;
+      update();
+    };
+
     stage.appendChild(box);
   });
 
   update();
 }
 
-// UPDATE POSITIONS
+// UPDATE
 function update(){
   const boxes = document.querySelectorAll(".video-box");
 
@@ -264,53 +233,18 @@ function update(){
 
     if(i === index){
       box.classList.add("active");
-    } 
+    }
     else if(i === index - 1){
       box.classList.add("prev");
-    } 
+    }
     else if(i === index + 1){
       box.classList.add("next");
     }
   });
 }
 
-// NAVIGATION
-function next(){
-  if(index < videos.length-1){
-    index++;
-    update();
-  }
-}
-
-function prev(){
-  if(index > 0){
-    index--;
-    update();
-  }
-}
-
-// BUTTON NAVIGATION
-nextBtn.addEventListener("click", next);
-prevBtn.addEventListener("click", prev);
-
-// TOUCH + MOUSE SUPPORT
+// SWIPE
 let startX = 0;
-let isDown = false;
-
-stage.addEventListener("mousedown",e=>{
-  isDown = true;
-  startX = e.clientX;
-});
-
-stage.addEventListener("mouseup",e=>{
-  if(!isDown) return;
-  let diff = e.clientX - startX;
-
-  if(diff > 50) prev();
-  else if(diff < -50) next();
-
-  isDown = false;
-});
 
 stage.addEventListener("touchstart",e=>{
   startX = e.touches[0].clientX;
@@ -319,8 +253,14 @@ stage.addEventListener("touchstart",e=>{
 stage.addEventListener("touchend",e=>{
   let diff = e.changedTouches[0].clientX - startX;
 
-  if(diff > 50) prev();
-  else if(diff < -50) next();
+  if(diff > 50 && index > 0){
+    index--;
+    update();
+  }
+  else if(diff < -50 && index < videos.length-1){
+    index++;
+    update();
+  }
 });
 
 // CLOSE
