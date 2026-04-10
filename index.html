@@ -33,7 +33,7 @@ body{background:linear-gradient(to right,#00264d,#990000);color:#fff}
   background:#ff3b3b;
 }
 
-/* FADE PAGE */
+/* PAGE */
 .page{opacity:0;animation:fade .6s ease forwards}
 @keyframes fade{to{opacity:1}}
 
@@ -67,17 +67,48 @@ body{background:linear-gradient(to right,#00264d,#990000);color:#fff}
 h1{text-align:center;margin-bottom:15px;text-shadow:0 0 15px #fff}
 p{text-align:center;margin-bottom:25px;text-shadow:0 0 10px #fff}
 
-/* SOCIALS */
-.socials{display:flex;flex-direction:column;gap:12px;width:100%;margin-bottom:25px}
-.socials a{
-  display:flex;gap:10px;align-items:center;
-  background:rgba(255,255,255,.15);
-  padding:10px 16px;border-radius:20px;
-  text-decoration:none;color:#fff;font-weight:bold;
+/* SOCIALS - UPDATED */
+.socials{
+  display:flex;
+  flex-wrap:wrap;
   justify-content:center;
+  gap:12px;
+  width:100%;
+  margin-bottom:25px;
 }
-.socials img{width:22px}
+.socials a{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:55px;
+  height:55px;
+  background:rgba(255,255,255,.15);
+  border-radius:18px;
+  text-decoration:none;
+}
+.socials img{
+  width:26px;
+}
 
+/* badge for second tiktok */
+.badge{
+  position:absolute;
+  top:-5px;
+  right:-5px;
+  background:#ff3b3b;
+  color:#fff;
+  font-size:10px;
+  width:18px;
+  height:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  font-weight:bold;
+}
+
+/* ACTION BUTTONS */
 .action-buttons{display:flex;gap:10px;width:100%;margin-bottom:18px}
 .action-buttons a{
   flex:1;text-align:center;padding:10px 0;
@@ -95,7 +126,7 @@ p{text-align:center;margin-bottom:25px;text-shadow:0 0 10px #fff}
 }
 @keyframes float{50%{transform:translateY(-8px)}}
 
-/* ===== PAYMENT POPUP ===== */
+/* PAYMENT POPUP */
 .overlay{
   position:fixed;inset:0;
   background:rgba(0,0,0,.4);
@@ -118,23 +149,10 @@ p{text-align:center;margin-bottom:25px;text-shadow:0 0 10px #fff}
   cursor:pointer;font-size:18px;
   opacity:.8;
 }
-.pay-item{
-  margin-top:18px;
-}
-.pay-logo{
-  width:90px;
-  margin-bottom:8px;
-}
-.pay-number{
-  font-size:20px;
-  font-weight:bold;
-  letter-spacing:1px;
-}
-.pay-name{
-  font-size:9px;
-  opacity:.7;
-  margin-top:2px;
-}
+.pay-item{margin-top:18px}
+.pay-logo{width:90px;margin-bottom:8px}
+.pay-number{font-size:20px;font-weight:bold;letter-spacing:1px}
+.pay-name{font-size:9px;opacity:.7;margin-top:2px}
 .copy-btn{
   margin-left:8px;
   font-size:11px;
@@ -177,12 +195,30 @@ p{text-align:center;margin-bottom:25px;text-shadow:0 0 10px #fff}
 <h1 id="title">Hi, I'm EJ!</h1>
 <p id="desc">I'm a TikTok content creator & Social Media Manager. I make content, grow accounts, and create vibes that hit. Welcome to my world of creativity.</p>
 
+<!-- SOCIALS (ICON ONLY) -->
 <div class="socials">
-<a href="https://www.tiktok.com/@justtt_ej"><img src="tiktok.png">TikTok 1</a>
-<a href="https://www.tiktok.com/@nottt_ej"><img src="tiktok.png">TikTok 2</a>
-<a href="https://instagram.com/justtt_ej"><img src="instagram.png">Instagram</a>
-<a href="https://t.me/justtt_ej"><img src="telegram.png">Telegram</a>
-<a href="https://youtube.com/@ej_vlogs1"><img src="youtube.png">YouTube</a>
+
+<a href="https://www.tiktok.com/@justtt_ej">
+  <img src="tiktok.png">
+</a>
+
+<a href="https://www.tiktok.com/@nottt_ej">
+  <img src="tiktok.png">
+  <div class="badge">2</div>
+</a>
+
+<a href="https://instagram.com/justtt_ej">
+  <img src="instagram.png">
+</a>
+
+<a href="https://t.me/justtt_ej">
+  <img src="telegram.png">
+</a>
+
+<a href="https://youtube.com/@ej_vlogs1">
+  <img src="youtube.png">
+</a>
+
 </div>
 
 <div class="action-buttons">
@@ -261,17 +297,17 @@ enBtn.onclick=()=>applyLang("en");
 const saved=localStorage.getItem("lang");
 if(saved) applyLang(saved);
 
-/* OPEN POPUP */
+/* POPUP */
 payText.onclick=()=>{
 overlay.style.display="flex";
 mainBox.classList.add("blur");
 };
 
-/* CLOSE */
 closePop.onclick=()=>{
 overlay.style.display="none";
 mainBox.classList.remove("blur");
 };
+
 overlay.onclick=(e)=>{
 if(e.target===overlay){
 overlay.style.display="none";
