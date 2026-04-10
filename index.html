@@ -1,294 +1,386 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EJ | Home</title>
+<title>Packages</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
-body{background:linear-gradient(to right,#00264d,#990000);color:#fff}
 
-/* LANGUAGE SWITCH */
-.lang-wrap{
-  position:absolute;
-  top:10px;
-  left:10px;
-  display:flex;gap:8px;
-  z-index:100;
-  transition:all .6s ease-out;
-  opacity:0.8;
-}
-.lang-wrap.top{transform:none}
-.lang-btn{
-  padding:4px 10px;
-  border-radius:16px;
-  background:rgba(0,0,0,.5);
-  cursor:pointer;
-  font-size:.75rem;
-  transition:.25s;
-}
-.lang-btn.active{
-  transform:scale(1.1);
-  background:#ff3b3b;
+body{
+  background:linear-gradient(to right,#00264d,#990000);
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:20px;
 }
 
-/* FADE PAGE */
-.page{opacity:0;animation:fade .6s ease forwards}
-@keyframes fade{to{opacity:1}}
+h1{margin:20px 0;text-shadow:0 0 15px #fff;}
 
-/* CONTAINER */
-.container{
-  max-width:500px;margin:80px auto 30px;
-  padding:30px 20px;
+.package-card{
+  width:100%;
+  max-width:500px;
   background:rgba(0,0,0,.35);
   border-radius:20px;
-  display:flex;flex-direction:column;align-items:center;
-  position:relative;
-  transition:.3s;
-}
-.blur{filter:blur(6px) brightness(.6)}
-
-/* PAYMENT BUTTON */
-.payment-btn{
-  position:absolute;top:10px;right:10px;
-  background:rgba(0,0,0,.6);
-  padding:6px 10px;border-radius:20px;
-  cursor:pointer;font-size:.85rem;
-}
-.payment-btn:before{content:"💰 ";}
-
-/* PROFILE */
-.profile-pic{
-  width:180px;height:180px;border-radius:50%;
-  border:5px solid #fff;object-fit:cover;margin-bottom:20px;
+  padding:25px 15px;
 }
 
-h1{text-align:center;margin-bottom:15px;text-shadow:0 0 15px #fff}
-p{text-align:center;margin-bottom:25px;text-shadow:0 0 10px #fff}
-
-/* SOCIALS */
-.socials{display:flex;flex-direction:column;gap:12px;width:100%;margin-bottom:25px}
-.socials a{
-  display:flex;gap:10px;align-items:center;
-  background:rgba(255,255,255,.15);
-  padding:10px 16px;border-radius:20px;
-  text-decoration:none;color:#fff;font-weight:bold;
-  justify-content:center;
-}
-.socials img{width:22px}
-
-.action-buttons{display:flex;gap:10px;width:100%;margin-bottom:18px}
-.action-buttons a{
-  flex:1;text-align:center;padding:10px 0;
-  border-radius:20px;background:rgba(0,0,0,.7);
-  text-decoration:none;color:#fff;font-weight:bold;
-}
-
-.packages{
-  width:100%;text-align:center;
-  padding:14px 0;border-radius:30px;
+.section-title{
+  margin-top:18px;
+  padding:12px;
   background:#ff3b3b;
-  color:#fff;font-weight:bold;
-  text-decoration:none;
-  animation:float 2.5s ease-in-out infinite;
+  border-radius:20px;
+  font-weight:900;
+  text-align:center;
+  text-shadow:0 0 10px #fff;
 }
-@keyframes float{50%{transform:translateY(-8px)}}
 
-/* ===== PAYMENT POPUP ===== */
-.overlay{
-  position:fixed;inset:0;
-  background:rgba(0,0,0,.4);
+/* THICK SLIDER */
+.slider{
+  width:100%;
+  height:24px;
+  border-radius:20px;
+  background:rgba(255,255,255,.2);
+}
+
+.slider::-webkit-slider-thumb{
+  appearance:none;
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 0 15px #fff;
+}
+
+.option{
+  padding:10px 12px;
+  border-radius:18px;
+  background:rgba(255,255,255,.15);
+  margin-top:8px;
+  cursor:pointer;
+  text-align:center;
+  font-weight:bold;
+  display:inline-block;
+}
+
+@keyframes floatSelect{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.06)}
+  100%{transform:scale(1)}
+}
+
+.option.active{
+  background:rgba(255,59,59,0.2);
+  animation:floatSelect 1.6s infinite;
+}
+
+.platforms{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+.small{
+  font-size:12px;
+  padding:6px 8px;
+}
+
+.video-btn{
+  width:100%;
+  margin-top:20px;
+  padding:16px;
+  border:none;
+  border-radius:30px;
+  background:#fff;
+  color:#000;
+  font-weight:bold;
+  font-size:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  cursor:pointer;
+  box-shadow:0 0 25px #fff;
+}
+
+.price-box{
+  margin-top:15px;
+  padding:14px;
+  background:rgba(0,0,0,.6);
+  border-radius:15px;
+  font-size:28px;
+  font-weight:bold;
+  text-align:center;
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  backdrop-filter:blur(18px) brightness(.7);
   display:none;
   align-items:center;
   justify-content:center;
-  z-index:999;
 }
-.popup{
+
+.stage{
   width:320px;
-  background:#111;
-  border-radius:18px;
-  padding:22px 18px 20px;
+  height:540px;
   position:relative;
-  box-shadow:0 0 30px rgba(0,0,0,.6);
-  text-align:center;
 }
+
+.video-box{
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:25px;
+  overflow:hidden;
+  background:#000;
+  box-shadow:0 20px 60px rgba(0,0,0,.8);
+  opacity:0;
+  transform:scale(.7);
+  transition:.4s;
+}
+
+.video-box.active{opacity:1;transform:scale(1);z-index:3;}
+.video-box.prev{opacity:.4;transform:translateX(-180px) scale(.85);}
+.video-box.next{opacity:.4;transform:translateX(180px) scale(.85);}
+
+video{width:100%;height:100%;object-fit:cover;}
+
 .close{
-  position:absolute;top:8px;right:10px;
-  cursor:pointer;font-size:18px;
-  opacity:.8;
-}
-.pay-item{
-  margin-top:18px;
-}
-.pay-logo{
-  width:90px;
-  margin-bottom:8px;
-}
-.pay-number{
-  font-size:20px;
-  font-weight:bold;
-  letter-spacing:1px;
-}
-.pay-name{
-  font-size:9px;
-  opacity:.7;
-  margin-top:2px;
-}
-.copy-btn{
-  margin-left:8px;
-  font-size:11px;
-  padding:2px 6px;
-  border-radius:6px;
-  background:#ff3b3b;
+  position:absolute;
+  top:20px;
+  right:20px;
+  font-size:24px;
   cursor:pointer;
 }
-.toast{
-  position:fixed;
-  bottom:30px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#000;
-  padding:8px 14px;
-  border-radius:12px;
-  font-size:12px;
-  opacity:0;
-  transition:.3s;
-  z-index:1000;
-}
-.toast.show{opacity:1}
 </style>
 </head>
 
 <body>
 
-<div class="lang-wrap" id="langWrap">
-  <div class="lang-btn" id="amBtn">አማርኛ</div>
-  <div class="lang-btn" id="enBtn">English</div>
+<h1>Custom Package</h1>
+
+<div class="package-card">
+
+<p class="section-title">Videos per week</p>
+<input type="range" min="1" max="7" value="3" class="slider" id="videoRange">
+<p id="rangeValue" style="text-align:center; margin-top:8px;">3 videos per week</p>
+
+<p class="section-title">Shooting Type</p>
+<div class="option active" onclick="selectSingle(this,'shoot')">Shoot with iPhone</div>
+<div class="option" onclick="selectSingle(this,'shoot')">Shoot with digital camera</div>
+
+<p class="section-title">Host / Model</p>
+<div class="option" onclick="selectSingle(this,'host')">No host needed</div>
+<div class="option active" onclick="selectSingle(this,'host')">Host/model included</div>
+
+<p class="section-title">Platforms</p>
+<div class="platforms">
+<div class="option small active" onclick="toggleMulti(this)">TikTok video</div>
+<div class="option small" onclick="toggleMulti(this)">TikTok photo slides</div>
+<div class="option small" onclick="toggleMulti(this)">Instagram reels</div>
+<div class="option small" onclick="toggleMulti(this)">Instagram posts</div>
+<div class="option small" onclick="toggleMulti(this)">Facebook posts</div>
+<div class="option small" onclick="toggleMulti(this)">Telegram posts</div>
 </div>
 
-<div class="page">
-<div class="container" id="mainBox">
+<button class="video-btn">
+<img src="play-button.png" width="20"> Videos
+</button>
 
-<div class="payment-btn" id="payText">Payment</div>
-
-<img src="your-picture.jpg" class="profile-pic">
-
-<h1 id="title">Hi, I'm EJ!</h1>
-<p id="desc">I'm a TikTok content creator & Social Media Manager. I make content, grow accounts, and create vibes that hit. Welcome to my world of creativity.</p>
-
-<div class="socials">
-<a href="https://www.tiktok.com/@justtt_ej"><img src="tiktok.png">TikTok 1</a>
-<a href="https://www.tiktok.com/@nottt_ej"><img src="tiktok.png">TikTok 2</a>
-<a href="https://instagram.com/justtt_ej"><img src="instagram.png">Instagram</a>
-<a href="https://t.me/justtt_ej"><img src="telegram.png">Telegram</a>
-<a href="https://youtube.com/@ej_vlogs1"><img src="youtube.png">YouTube</a>
-</div>
-
-<div class="action-buttons">
-<a href="tel:+251923406940" id="callBtn">Call</a>
-<a href="sms:+251923406940" id="smsBtn">Text</a>
-</div>
-
-<a href="packages.html" class="packages" id="packBtn">Packages</a>
+<div class="price-box" id="price">0 Birr</div>
 
 </div>
+
+<div class="modal" id="modal">
+  <div class="close" onclick="closeModal()">✖</div>
+  <div class="stage" id="stage"></div>
 </div>
-
-<!-- PAYMENT POPUP -->
-<div class="overlay" id="overlay">
-  <div class="popup">
-    <div class="close" id="closePop">✕</div>
-
-    <div class="pay-item">
-      <img src="cbe.png" class="pay-logo">
-      <div class="pay-number">
-        1000733211796
-        <span class="copy-btn" onclick="copyAcc('1000733211796')">Copy</span>
-      </div>
-      <div class="pay-name">mr Ejunayehu Wendimu</div>
-    </div>
-
-    <div class="pay-item">
-      <img src="telebirr.png" class="pay-logo">
-      <div class="pay-number">
-        0923406940
-        <span class="copy-btn" onclick="copyAcc('0923406940')">Copy</span>
-      </div>
-      <div class="pay-name">Wondimu</div>
-    </div>
-
-  </div>
-</div>
-
-<div class="toast" id="toast">Account copied!</div>
 
 <script>
-const amBtn=document.getElementById("amBtn");
-const enBtn=document.getElementById("enBtn");
-const wrap=document.getElementById("langWrap");
-const overlay=document.getElementById("overlay");
-const mainBox=document.getElementById("mainBox");
-const toast=document.getElementById("toast");
+const modal=document.getElementById("modal");
+const stage=document.getElementById("stage");
 
-function applyLang(lang){
-wrap.classList.add("top");
-localStorage.setItem("lang",lang);
+let videos=[],index=0;
 
-amBtn.classList.toggle("active",lang==="am");
-enBtn.classList.toggle("active",lang==="en");
-
-if(lang==="am"){
-title.innerText="ሰላም፣ እኔ EJ ነኝ!";
-desc.innerText="እኔ Tiktok ላይ የተለያዩ አይነት Videoዎችን እሰራለሁ፣ Social Media Managerም ነኝ፣ ይዘት እፈጥራለሁ፣ አካውንቶችን አሳድጋለሁ።";
-payText.innerText="ክፍያ";
-callBtn.innerText="ለመደወል";
-smsBtn.innerText="መልዕክት";
-packBtn.innerText="ፓኬጆች";
-}else{
-title.innerText="Hi, I'm EJ!";
-desc.innerText="I'm a TikTok content creator & Social Media Manager. I make content, grow accounts, and create vibes that hit. Welcome to my world of creativity.";
-payText.innerText="Payment";
-callBtn.innerText="Call";
-smsBtn.innerText="Text";
-packBtn.innerText="Packages";
-}
-}
-
-amBtn.onclick=()=>applyLang("am");
-enBtn.onclick=()=>applyLang("en");
-
-const saved=localStorage.getItem("lang");
-if(saved) applyLang(saved);
-
-/* OPEN POPUP */
-payText.onclick=()=>{
-overlay.style.display="flex";
-mainBox.classList.add("blur");
+document.querySelector(".video-btn").onclick=()=>{
+  videos=[];
+  for(let i=1;i<=10;i++) videos.push(`basic vid${i}.mp4`);
+  index=0;
+  build();
+  modal.style.display="flex";
 };
 
-/* CLOSE */
-closePop.onclick=()=>{
-overlay.style.display="none";
-mainBox.classList.remove("blur");
-};
-overlay.onclick=(e)=>{
-if(e.target===overlay){
-overlay.style.display="none";
-mainBox.classList.remove("blur");
+function build(){
+  stage.innerHTML="";
+
+  videos.forEach((src,i)=>{
+    const box=document.createElement("div");
+    box.className="video-box";
+
+    const vid=document.createElement("video");
+    vid.src=src;
+    vid.loop=true;
+    vid.muted=true;
+    vid.playsInline=true;
+
+    box.appendChild(vid);
+
+    box.onclick=()=>{
+      index=i;
+      update();
+    };
+
+    stage.appendChild(box);
+  });
+
+  update();
 }
+
+function update(){
+  const boxes=document.querySelectorAll(".video-box");
+
+  boxes.forEach((box,i)=>{
+    const v=box.querySelector("video");
+
+    box.className="video-box";
+
+    v.pause();
+    v.currentTime=0;
+    v.muted=true;
+
+    if(i===index){
+      box.classList.add("active");
+      v.muted=false;
+      v.play();
+    }
+    else if(i===index-1){
+      box.classList.add("prev");
+    }
+    else if(i===index+1){
+      box.classList.add("next");
+    }
+  });
+}
+
+let sx=0,ex=0;
+
+stage.addEventListener("touchstart",e=>sx=e.touches[0].clientX);
+stage.addEventListener("touchend",e=>{
+  ex=e.changedTouches[0].clientX;
+  let d=sx-ex;
+
+  if(d>50 && index<videos.length-1){index++;update();}
+  if(d<-50 && index>0){index--;update();}
+});
+
+function closeModal(){
+  modal.style.display="none";
+  stage.innerHTML="";
+}
+
+let selections={
+  videos:3,
+  shoot:"iphone",
+  host:true,
+  platforms:["TikTok video"]
 };
 
-/* COPY */
-function copyAcc(num){
-navigator.clipboard.writeText(num);
+const range=document.getElementById("videoRange");
+const rangeValue=document.getElementById("rangeValue");
 
-const lang=localStorage.getItem("lang")||"en";
-toast.innerText = lang==="am" ? "አካውንት Copy አድርገዋል!" : "Account copied!";
-toast.classList.add("show");
+range.oninput=()=>{
+  selections.videos=parseInt(range.value);
+  rangeValue.innerText=range.value+" videos per week";
+  updatePrice();
+};
 
-setTimeout(()=>toast.classList.remove("show"),1800);
+function selectSingle(el,group){
+  document.querySelectorAll(`[onclick*="${group}"]`)
+    .forEach(o=>o.classList.remove("active"));
+
+  el.classList.add("active");
+
+  if(group==="shoot"){
+    selections.shoot=el.innerText.includes("iPhone")?"iphone":"camera";
+  }
+
+  if(group==="host"){
+    selections.host=!el.innerText.includes("No");
+  }
+
+  updatePrice();
 }
+
+function toggleMulti(el){
+  const name=el.innerText;
+
+  if(el.classList.contains("active")){
+    if(selections.platforms.length===1) return;
+    el.classList.remove("active");
+    selections.platforms = selections.platforms.filter(p=>p!==name);
+  }else{
+    el.classList.add("active");
+    if(!selections.platforms.includes(name)){
+      selections.platforms.push(name);
+    }
+  }
+
+  updatePrice();
+}
+
+function calculatePrice(){
+  const videoPrices = {
+    1: 10000,
+    2: 14000,
+    3: 18000,
+    4: 21000,
+    5: 25000,
+    6: 30000,
+    7: 35000
+  };
+
+  let price = videoPrices[selections.videos];
+
+  if(selections.shoot === "camera"){
+    price += 8000;
+  }
+
+  if(selections.host === false){
+    price -= 4000;
+  }
+
+  let platforms = selections.platforms;
+
+  if(platforms.length > 0){
+    let first = platforms[0];
+    price += 1500;
+
+    for(let i=1;i<platforms.length;i++){
+      if(
+        platforms[i].toLowerCase().includes("tiktok") &&
+        first.toLowerCase().includes("tiktok")
+      ){
+        price += 500;
+      }else{
+        price += 1500;
+      }
+    }
+  }
+
+  return price;
+}
+
+function updatePrice(){
+  document.getElementById("price").innerText =
+    calculatePrice().toLocaleString()+" Birr";
+}
+
+updatePrice();
 </script>
 
 </body>
