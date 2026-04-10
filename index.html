@@ -1,77 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EJ | Home</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+body{background:linear-gradient(to right,#00264d,#990000);color:#fff}
 
 /* LANGUAGE SWITCH */
 .lang-wrap{
-  position:absolute; /* was fixed */
   position:absolute;
-top:10px;
-left:10px;
-  display:flex;gap:8px; /* smaller gap */
+  top:10px;
+  left:10px;
   display:flex;gap:8px;
-z-index:100;
-transition:all .6s ease-out;
-  opacity:0.8; /* translucent */
-}
-.lang-wrap.top{
-  transform:none;
+  z-index:100;
+  transition:all .6s ease-out;
   opacity:0.8;
 }
 .lang-wrap.top{transform:none}
 .lang-btn{
-  padding:4px 10px; /* smaller */
   padding:4px 10px;
-border-radius:16px;
-background:rgba(0,0,0,.5);
-cursor:pointer;
-  font-size:.75rem; /* smaller font */
+  border-radius:16px;
+  background:rgba(0,0,0,.5);
+  cursor:pointer;
   font-size:.75rem;
-transition:.25s;
+  transition:.25s;
 }
 .lang-btn.active{
-  transform:scale(1.1); /* slightly bigger when active */
   transform:scale(1.1);
-background:#ff3b3b;
+  background:#ff3b3b;
 }
 
 /* FADE PAGE */
-.page{
-  opacity:0;
-  animation:fade .6s ease forwards;
-}
 .page{opacity:0;animation:fade .6s ease forwards}
 @keyframes fade{to{opacity:1}}
 
 /* CONTAINER */
-@@ -50,9 +45,11 @@
-border-radius:20px;
-display:flex;flex-direction:column;align-items:center;
-position:relative;
+.container{
+  max-width:500px;margin:80px auto 30px;
+  padding:30px 20px;
+  background:rgba(0,0,0,.35);
+  border-radius:20px;
+  display:flex;flex-direction:column;align-items:center;
+  position:relative;
   transition:.3s;
 }
 .blur{filter:blur(6px) brightness(.6)}
 
-/* PAYMENT */
 /* PAYMENT BUTTON */
 .payment-btn{
-position:absolute;top:10px;right:10px;
-background:rgba(0,0,0,.6);
-@@ -61,6 +58,7 @@
+  position:absolute;top:10px;right:10px;
+  background:rgba(0,0,0,.6);
+  padding:6px 10px;border-radius:20px;
+  cursor:pointer;font-size:.85rem;
 }
 .payment-btn:before{content:"💰 ";}
 
 /* PROFILE */
 .profile-pic{
-width:180px;height:180px;border-radius:50%;
-border:5px solid #fff;object-fit:cover;margin-bottom:20px;
-@@ -69,6 +67,7 @@
+  width:180px;height:180px;border-radius:50%;
+  border:5px solid #fff;object-fit:cover;margin-bottom:20px;
+}
+
 h1{text-align:center;margin-bottom:15px;text-shadow:0 0 15px #fff}
 p{text-align:center;margin-bottom:25px;text-shadow:0 0 10px #fff}
 
 /* SOCIALS */
 .socials{display:flex;flex-direction:column;gap:12px;width:100%;margin-bottom:25px}
 .socials a{
-display:flex;gap:10px;align-items:center;
-@@ -95,19 +94,81 @@
-animation:float 2.5s ease-in-out infinite;
+  display:flex;gap:10px;align-items:center;
+  background:rgba(255,255,255,.15);
+  padding:10px 16px;border-radius:20px;
+  text-decoration:none;color:#fff;font-weight:bold;
+  justify-content:center;
+}
+.socials img{width:22px}
+
+.action-buttons{display:flex;gap:10px;width:100%;margin-bottom:18px}
+.action-buttons a{
+  flex:1;text-align:center;padding:10px 0;
+  border-radius:20px;background:rgba(0,0,0,.7);
+  text-decoration:none;color:#fff;font-weight:bold;
+}
+
+.packages{
+  width:100%;text-align:center;
+  padding:14px 0;border-radius:30px;
+  background:#ff3b3b;
+  color:#fff;font-weight:bold;
+  text-decoration:none;
+  animation:float 2.5s ease-in-out infinite;
 }
 @keyframes float{50%{transform:translateY(-8px)}}
 
@@ -142,19 +162,36 @@ animation:float 2.5s ease-in-out infinite;
 
 <body>
 
-<!-- LANGUAGE -->
 <div class="lang-wrap" id="langWrap">
-<div class="lang-btn" id="amBtn">አማርኛ</div>
-<div class="lang-btn" id="enBtn">English</div>
+  <div class="lang-btn" id="amBtn">አማርኛ</div>
+  <div class="lang-btn" id="enBtn">English</div>
 </div>
 
 <div class="page">
-<div class="container">
 <div class="container" id="mainBox">
 
 <div class="payment-btn" id="payText">Payment</div>
 
-@@ -134,10 +195,41 @@ <h1 id="title">Hi, I'm EJ!</h1>
+<img src="your-picture.jpg" class="profile-pic">
+
+<h1 id="title">Hi, I'm EJ!</h1>
+<p id="desc">I'm a TikTok content creator & Social Media Manager. I make content, grow accounts, and create vibes that hit. Welcome to my world of creativity.</p>
+
+<div class="socials">
+<a href="https://www.tiktok.com/@justtt_ej"><img src="tiktok.png">TikTok 1</a>
+<a href="https://www.tiktok.com/@nottt_ej"><img src="tiktok.png">TikTok 2</a>
+<a href="https://instagram.com/justtt_ej"><img src="instagram.png">Instagram</a>
+<a href="https://t.me/justtt_ej"><img src="telegram.png">Telegram</a>
+<a href="https://youtube.com/@ej_vlogs1"><img src="youtube.png">YouTube</a>
+</div>
+
+<div class="action-buttons">
+<a href="tel:+251923406940" id="callBtn">Call</a>
+<a href="sms:+251923406940" id="smsBtn">Text</a>
+</div>
+
+<a href="packages.html" class="packages" id="packBtn">Packages</a>
+
 </div>
 </div>
 
@@ -196,20 +233,30 @@ const toast=document.getElementById("toast");
 
 function applyLang(lang){
 wrap.classList.add("top");
-@@ -148,10 +240,10 @@ <h1 id="title">Hi, I'm EJ!</h1>
+localStorage.setItem("lang",lang);
+
+amBtn.classList.toggle("active",lang==="am");
+enBtn.classList.toggle("active",lang==="en");
 
 if(lang==="am"){
 title.innerText="ሰላም፣ እኔ EJ ነኝ!";
-desc.innerText="እኔ Tiktok ላይ የተለያዩ አይነት Videoዎችን እሰራለሁ፣ Social Media Managerም ነኝ ፣ ይዘት(content) እፈጥራለሁ፣ አካውንቶችን አሳድጋለሁ።";
 desc.innerText="እኔ Tiktok ላይ የተለያዩ አይነት Videoዎችን እሰራለሁ፣ Social Media Managerም ነኝ፣ ይዘት እፈጥራለሁ፣ አካውንቶችን አሳድጋለሁ።";
 payText.innerText="ክፍያ";
 callBtn.innerText="ለመደወል";
-smsBtn.innerText="አጭር የፅሁፍ መልዕክት ለመላክ";
 smsBtn.innerText="መልዕክት";
 packBtn.innerText="ፓኬጆች";
 }else{
 title.innerText="Hi, I'm EJ!";
-@@ -168,6 +260,35 @@ <h1 id="title">Hi, I'm EJ!</h1>
+desc.innerText="I'm a TikTok content creator & Social Media Manager. I make content, grow accounts, and create vibes that hit. Welcome to my world of creativity.";
+payText.innerText="Payment";
+callBtn.innerText="Call";
+smsBtn.innerText="Text";
+packBtn.innerText="Packages";
+}
+}
+
+amBtn.onclick=()=>applyLang("am");
+enBtn.onclick=()=>applyLang("en");
 
 const saved=localStorage.getItem("lang");
 if(saved) applyLang(saved);
@@ -245,3 +292,4 @@ setTimeout(()=>toast.classList.remove("show"),1800);
 </script>
 
 </body>
+</html>
