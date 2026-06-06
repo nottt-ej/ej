@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Editing Package</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+
+body{
+  background:linear-gradient(to right,#00264d,#990000);
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:20px;
+}
+
+h1{margin:20px 0;text-shadow:0 0 15px #fff;}
+
+.package-card{
+  width:100%;
+  max-width:500px;
+  background:rgba(0,0,0,.35);
+  border-radius:20px;
+  padding:25px 15px;
+}
+
+.section-title{
+  margin-top:18px;
+  padding:12px;
+  background:#ff3b3b;
+  border-radius:20px;
+  font-weight:900;
+  text-align:center;
+  text-shadow:0 0 10px #fff;
+}
+
+.slider{
+  width:100%;
+  height:24px;
+  border-radius:20px;
+  background:rgba(255,255,255,.2);
+}
+
+.slider::-webkit-slider-thumb{
+  appearance:none;
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 0 15px #fff;
+}
+
+.option{
+  padding:10px 12px;
+  border-radius:18px;
+  background:rgba(255,255,255,.15);
+  margin-top:8px;
+  cursor:pointer;
+  text-align:center;
+  font-weight:bold;
+  display:inline-block;
+}
+
+@keyframes floatSelect{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.06)}
+  100%{transform:scale(1)}
+}
+
+.option.active{
+  background:rgba(255,59,59,0.25);
+  animation:floatSelect 1.6s infinite;
+}
+
+.video-btn{
+  width:100%;
+  margin-top:20px;
+  padding:16px;
+  border:none;
+  border-radius:30px;
+  background:#fff;
+  color:#000;
+  font-weight:bold;
+  font-size:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  cursor:pointer;
+  box-shadow:0 0 25px #fff;
+}
+
+.price-box{
+  margin-top:15px;
+  padding:14px;
+  background:rgba(0,0,0,.6);
+  border-radius:15px;
+  font-size:28px;
+  font-weight:bold;
+  text-align:center;
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  backdrop-filter:blur(18px) brightness(.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+}
+
+.stage{
+  width:320px;
+  height:540px;
+  position:relative;
+}
+
+.video-box{
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:25px;
+  overflow:hidden;
+  background:#000;
+  box-shadow:0 20px 60px rgba(0,0,0,.8);
+  opacity:0;
+  transform:scale(.7);
+  transition:.4s;
+}
+
+.video-box.active{opacity:1;transform:scale(1);z-index:3;}
+.video-box.prev{opacity:.4;transform:translateX(-180px) scale(.85);}
+.video-box.next{opacity:.4;transform:translateX(180px) scale(.85);}
+
+video{width:100%;height:100%;object-fit:cover;}
+
+.close{
+  position:absolute;
+  top:20px;
+  right:20px;
+  font-size:24px;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Video Editing Package</h1>
+
+<div class="package-card">
+
+<p class="section-title">Videos per week</p>
+<input type="range" min="1" max="7" value="3" class="slider" id="videoRange">
+<p id="rangeValue" style="text-align:center; margin-top:8px;">3 videos per week</p>
+
+<p class="section-title">Edit Style</p>
+<div class="option active" onclick="selectSingle(this,'style')">Short Form</div>
+<div class="option" onclick="selectSingle(this,'style')">Long Form</div>
+<div class="option" onclick="selectSingle(this,'style')">Cinematic</div>
+
+<button class="video-btn">▶ Sample Videos</button>
+
+<div class="price-box" id="price">0 Birr</div>
+
+</div>
+
+<div class="modal" id="modal">
+  <div class="close" onclick="closeModal()">✖</div>
+  <div class="stage" id="stage"></div>
+</div>
+
+<script>
+
+const modal=document.getElementById("modal");
+const stage=document.getElementById("stage");
+
+let videos=[],index=0;
+
+document.querySelector(".video-btn").onclick=()=>{
+  videos=[];
+  for(let i=1;i<=10;i++) videos.push(`videoedit${i}.mp4`);
+  index=0;
+  build();
+  modal.style.display="flex";
+};
+
+function build(){
+  stage.innerHTML="";
+
+  videos.forEach((src,i)=>{
+    const box=document.createElement("div");
+    box.className="video-box";
+
+    const vid=document.createElement("video");
+    vid.src=src;
+    vid.loop=true;
+    vid.muted=true;
+    vid.playsInline=true;
+
+    box.appendChild(vid);
+
+    box.onclick=()=>{
+      index=i;
+      update();
+    };
+
+    stage.appendChild(box);
+  });
+
+  update();
+}
+
+function update(){
+  const boxes=document.querySelectorAll(".video-box");
+
+  boxes.forEach((box,i)=>{
+    const v=box.querySelector("video");
+
+    box.className="video-box";
+
+    v.pause();
+    v.currentTime=0;
+
+    if(i===index){
+      box.classList.add("active");
+      v.muted=false;
+      v.play();
+    }
+    else if(i===index-1){
+      box.classList.add("prev");
+    }
+    else if(i===index+1){
+      box.classList.add("next");
+    }
+  });
+}
+
+let sx=0,ex=0;
+
+stage.addEventListener("touchstart",e=>sx=e.touches[0].clientX);
+stage.addEventListener("touchend",e=>{
+  ex=e.changedTouches[0].clientX;
+  let d=sx-ex;
+
+  if(d>50 && index<videos.length-1){index++;update();}
+  if(d<-50 && index>0){index--;update();}
+});
+
+function closeModal(){
+  modal.style.display="none";
+  stage.innerHTML="";
+}
+
+let selections={
+  videos:3,
+  style:"short"
+};
+
+const range=document.getElementById("videoRange");
+const rangeValue=document.getElementById("rangeValue");
+
+range.oninput=()=>{
+  selections.videos=parseInt(range.value);
+  rangeValue.innerText=range.value+" videos per week";
+  updatePrice();
+};
+
+function selectSingle(el,group){
+  document.querySelectorAll(`[onclick*="${group}"]`)
+    .forEach(o=>o.classList.remove("active"));
+
+  el.classList.add("active");
+
+  if(group==="style"){
+    if(el.innerText.includes("Short")) selections.style="short";
+    if(el.innerText.includes("Long")) selections.style="long";
+    if(el.innerText.includes("Cinematic")) selections.style="cinematic";
+  }
+
+  updatePrice();
+}
+
+function calculatePrice(){
+
+  const base = {
+    1: 4000,
+    2: 7000,
+    3: 10000,
+    4: 13000,
+    5: 16000,
+    6: 19000,
+    7: 22000
+  };
+
+  let price = base[selections.videos];
+
+  if(selections.style === "long"){
+    price += 5000;
+  }
+
+  if(selections.style === "cinematic"){
+    price += 11000;
+  }
+
+  return price;
+}
+
+function updatePrice(){
+  document.getElementById("price").innerText =
+    calculatePrice().toLocaleString()+" Birr";
+}
+
+updatePrice();
+
+</script>
+
+</body>
+</html>
