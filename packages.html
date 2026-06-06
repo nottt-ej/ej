@@ -41,6 +41,12 @@ button{
   color:#fff;
 }
 
+/* ADDED: make video editing button match style */
+#videoEditBtn {
+  background:#ff3b3b;
+  color:#fff;
+}
+
 button:hover{transform:scale(1.05)}
 </style>
 </head>
@@ -52,22 +58,26 @@ button:hover{transform:scale(1.05)}
 <div class="package-buttons">
   <button id="tiktokBtn">TikTok Promotion</button>
   <button id="socialBtn">Social Media Management</button>
+  <button id="videoEditBtn">Video Editing</button>
 </div>
 
 <script>
 const title = document.getElementById("title");
 const tiktokBtn = document.getElementById("tiktokBtn");
 const socialBtn = document.getElementById("socialBtn");
+const videoEditBtn = document.getElementById("videoEditBtn");
 
 function setLang(lang){
   if(lang==="am"){
     title.innerText="ፓኬጅ ይምረጡ";
     tiktokBtn.innerText="የTikTok ማስታወቂያ";
     socialBtn.innerText="ሶሻል ሚዲያ አስተዳደር";
+    videoEditBtn.innerText="ቪዲዮ ኤዲቲንግ";
   }else{
     title.innerText="Choose a Package";
     tiktokBtn.innerText="TikTok Promotion";
     socialBtn.innerText="Social Media Management";
+    videoEditBtn.innerText="Video Editing";
   }
 }
 
@@ -76,6 +86,7 @@ setLang(saved);
 
 tiktokBtn.onclick = ()=> window.location="tiktok-promo-details.html";
 socialBtn.onclick = ()=> window.location="social-management-details.html";
+videoEditBtn.onclick = ()=> window.location="videoedit.html";
 </script>
 
 </body>
